@@ -4,7 +4,9 @@ using System.Collections.Generic;
 
 public class DialogManager: MonoBehaviour {
 
-	public float timePerCharacter = 0.01f;
+	public float timePerCharacter = 0.05f;
+	public float baseTime = 1f;
+	
 	[SerializeField]
 	private DialogUI _dialogUI;
 
@@ -35,7 +37,6 @@ public class DialogManager: MonoBehaviour {
 	}
 
 	private void Update() {
-		
 		if (_timer > 0f) 
 		{
 			_timer -= Time.deltaTime;
@@ -44,9 +45,10 @@ public class DialogManager: MonoBehaviour {
 		{
 			String str = _dialogs.Dequeue();
 			_dialogUI.SetText(str);
-			_timer = str.Length * timePerCharacter;
+			_timer = baseTime + str.Length * timePerCharacter;
+		} else {
+			_dialogUI.SetText("");
 		}
-		
 	}
 
 	public void AddDialog(string str) {

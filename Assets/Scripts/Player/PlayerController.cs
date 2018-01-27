@@ -10,7 +10,10 @@ public class PlayerController : MonoBehaviour
 
 	private Interactable targetInteractable; 
 
-	private float walkingSpeed = 4f; 
+	private float walkingSpeed = 4f;
+
+	private bool _isWalking = false;
+
 	void Start()
 	{
 		agent = GetComponent<NavMeshAgent>();
@@ -20,21 +23,24 @@ public class PlayerController : MonoBehaviour
 
 	public bool isWalking {
 		get {
-			return !agent.isStopped;
+			return _isWalking;
 		}
 	}
 	void Update()
 	{
 
-		if (targetInteractable)
+		
+		if (agent.remainingDistance < 0.5f)
 		{
-			if (agent.remainingDistance < 0.2f)
+			agent.speed = 0;
+			agent.isStopped = true;
+			_isWalking = false;
+			if (targetInteractable)
 			{
-				agent.speed = 0;
-				agent.isStopped = true;
 				targetInteractable.Interact();
 				targetInteractable = null;
 			}
+			
 		}
 
 		if (Input.GetMouseButtonDown(0))
@@ -50,11 +56,15 @@ public class PlayerController : MonoBehaviour
 					agent.SetDestination(targetInteractable.interactionPoint.position);
 					agent.speed = walkingSpeed;
 					agent.isStopped = false;
+					_isWalking = true;
 				}
 			} 
 			else if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, 100, maskClickToWalk))
 			{
+				agent.speed = walkingSpeed;
+				agent.isStopped = false;
 				agent.SetDestination(hit.point);
+				_isWalking = true;
 			} 
 		}
 
