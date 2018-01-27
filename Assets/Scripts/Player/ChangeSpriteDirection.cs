@@ -4,22 +4,25 @@ class ChangeSpriteDirection: MonoBehaviour {
 
 	public Animator animator;
 
-	Vector3 lastPosition;
+	private Vector3 _lastPosition;
 
-	float speed;
+	private float _speed;
+
+	private PlayerController _playerController; 
 
 	public float minSpeedForWalk = 0.05f;
 
+	void Start() {
+		_playerController = GetComponent<PlayerController>();
+	}
 	void Update() {
 		// Vector3 direction = transform.position - lastPosition;
-		
 		//float angle = Vector3.Angle(Camera.main.transform.forward, direction);
-		speed = (transform.position - lastPosition).magnitude;
 
-		animator.SetBool("walking", (speed > minSpeedForWalk));
-		 
+		_speed = (transform.position - _lastPosition).magnitude;
+		animator.SetBool("walking", _playerController.isWalking);
 		
-		lastPosition = transform.position;
+		_lastPosition = transform.position;
 	}
 
 	void GetDirection()

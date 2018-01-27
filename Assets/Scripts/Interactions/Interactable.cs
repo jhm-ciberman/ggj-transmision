@@ -7,6 +7,8 @@ public class Interactable : MonoBehaviour {
 	[SerializeField]
 	private Interaction interaction; 
 
+	public Transform interactionPoint; 
+	
 	public void Interact() {
 		if (interaction) {
 			interaction.Interact();
