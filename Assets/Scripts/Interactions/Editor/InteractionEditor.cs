@@ -5,26 +5,46 @@ using Conditions;
 using System.Collections.Generic;
 using System; 
 
+[Serializable]
 [CustomEditor(typeof(Interaction))]
 public class InteractionEditor: Editor {
 
+	[SerializeField]
 	private ConditionType conditionType; 
+
+	[SerializeField]
 	private ActionType actionType; 
+
+	[SerializeField]
 	private ActionType elseActionType; 
 
+    void OnEnable ()
+    {
+		hideFlags = HideFlags.HideAndDontSave;
+
+		Interaction t = (Interaction) target;
+        
+        if (t.conditions == null)
+            t.conditions = new List<Condition>();
+		if (t.actions == null)
+            t.actions = new List<Actions.Action>();
+		if (t.elseActions == null)
+            t.elseActions = new List<Actions.Action>();
+    }
 
 	public override void OnInspectorGUI()
 	{
 		Interaction t = (Interaction) target;
 
 		// =======================================================
-
+		
 		EditorGUILayout.LabelField("If");
-		foreach (var condition in t.conditions)
+		foreach (Condition condition in t.conditions)
 		{
 			EditorGUILayout.BeginVertical();
 			condition.OnGUI();
 			EditorGUILayout.EndVertical();
+			EditorGUILayout.Separator();
 		}
 		
 		conditionType = (ConditionType) EditorGUILayout.EnumPopup(conditionType);
@@ -47,6 +67,7 @@ public class InteractionEditor: Editor {
 			EditorGUILayout.BeginVertical();
 			action.OnGUI();
 			EditorGUILayout.EndVertical();
+			EditorGUILayout.Separator();
 		}
 		
 		actionType = (ActionType)EditorGUILayout.EnumPopup(actionType);
@@ -82,28 +103,41 @@ public class InteractionEditor: Editor {
 			t.elseActions.RemoveAt(t.elseActions.Count - 1);
 		}
 		EditorGUILayout.EndHorizontal();
+		
+		Debug.Log("Set dirty");
+		EditorUtility.SetDirty(t);
+		AssetDatabase.SaveAssets();
+		/*if(EditorGUI.EndChangeCheck()) {
+			//serObj.ApplyModifiedProperties();
+			//
+			
+		}*/
 	}
 
 
-	public ICondition MakeCondition(ConditionType type)
+	public Condition MakeCondition(ConditionType type)
 	{
 		switch (type)
 		{
 			case ConditionType.NoCondition:
-				return new NoCondition();
+				return CreateInstance<NoCondition>();
+			case ConditionType.HasItem: 
+				return CreateInstance<HasItemCondition>();
 			default:
 				throw new System.Exception("Invalid condition type");
 		}
 	}
 
-	public IAction MakeAction(ActionType type)
+	public Actions.Action MakeAction(ActionType type)
 	{
 		switch (type)
 		{
 			case ActionType.NoAction:
-				return new NoAction();
+				return CreateInstance<NoAction>();
 			case ActionType.AddItem:
-				return new AddItemAction();
+				return CreateInstance<AddItemAction>();
+			case ActionType.SayDialog:
+				return CreateInstance<SayDialogAction>();
 			default:
 				throw new System.Exception("Invalid action type");
 		}

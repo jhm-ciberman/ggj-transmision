@@ -1,16 +1,21 @@
 using UnityEditor;
 using Inventory;
+using UnityEngine;
 
 namespace Actions {
-	public class AddItemAction : IAction
+
+	[System.Serializable]
+	public class AddItemAction : Action
 	{
+		[SerializeField]
 		public Item item;
-		public void DoAction()
+		
+		public override void DoAction()
 		{
-			// Nothing
+			InventoryManager.Instance.AddItem(item);
 		}
 
-		public void OnGUI()
+		public override void OnGUI()
 		{
 			EditorGUILayout.LabelField("Add Item");
 			item = (Item) EditorGUILayout.ObjectField(item, typeof(Item), true);

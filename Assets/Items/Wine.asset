@@ -11,4 +11,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 212afcaa1027f23499452c5514e38b77, type: 3}
   m_Name: Wine
   m_EditorClassIdentifier: 
-  name: Wine
+  itemName: a
+  sprite: {fileID: 0}
