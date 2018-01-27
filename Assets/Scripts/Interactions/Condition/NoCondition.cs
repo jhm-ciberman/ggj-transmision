@@ -1,14 +1,17 @@
 using UnityEditor;
+using UnityEngine;
 
 namespace Conditions {
-	public class NoCondition : ICondition
+
+	[System.Serializable]
+	public class NoCondition : Condition
 	{
-		public bool Check()
+		public override bool Check()
 		{
 			return true;
 		}
 
-		public void OnGUI()
+		public override void OnGUI()
 		{
 			EditorGUILayout.LabelField("No Condition");
 		}

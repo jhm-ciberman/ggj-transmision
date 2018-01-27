@@ -10,21 +10,28 @@ public enum ActionType
 {
 	NoAction,
 	AddItem,
+	SayDialog,
 }
 public enum ConditionType
 {
 	NoCondition,
+	HasItem
 
 }
 
+[System.Serializable]
 [CreateAssetMenu(fileName = "Interaction", menuName = "PointAndClick/Interaction", order = 1)]
 public class Interaction : ScriptableObject {
 
-	public List<ICondition> conditions = new List<ICondition>();
+	[SerializeField]
+	public List<Condition> conditions;
 
-	public List<IAction> actions = new List<IAction>();
+	[SerializeField]
+	public List<Action> actions;
 
-	public List<IAction> elseActions = new List<IAction>();
+	[SerializeField]
+	public List<Action> elseActions;
+
 
 	public void Interact() {
 		if (CheckConditions(this.conditions)) {
@@ -34,7 +41,7 @@ public class Interaction : ScriptableObject {
 		}
 	}
 
-	private bool CheckConditions(List<ICondition> conditions) 
+	private bool CheckConditions(List<Condition> conditions) 
 	{
 		foreach (var condition in conditions) 
 		{
@@ -46,7 +53,7 @@ public class Interaction : ScriptableObject {
 		return true;
 	}
 
-	private void DoActions(List<IAction> actions)
+	private void DoActions(List<Action> actions)
 	{
 		foreach (var action in actions)
 		{

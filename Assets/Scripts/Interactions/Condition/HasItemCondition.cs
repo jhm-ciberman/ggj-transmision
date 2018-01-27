@@ -1,18 +1,22 @@
 using UnityEditor;
-using Inventory; 
+using Inventory;
+using UnityEngine;
 
 namespace Conditions {
-	public class HasItemCondition : ICondition
+
+	[System.Serializable]
+	public class HasItemCondition : Condition
 	{
 		public Item item;
-		public bool Check()
+		public override bool Check()
 		{
 			return InventoryManager.Instance.HasItem(item);
 		}
 
-		public void OnGUI()
+		public override void OnGUI()
 		{
-			EditorGUILayout.LabelField("No Condition");
+			EditorGUILayout.LabelField("Has Item");
+			item = (Item)EditorGUILayout.ObjectField(item, typeof(Item), true);
 		}
 	}
 }

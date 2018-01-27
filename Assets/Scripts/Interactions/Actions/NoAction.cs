@@ -1,14 +1,17 @@
 using UnityEditor;
+using UnityEngine;
 
 namespace Actions {
-	public class NoAction : IAction
+
+	[System.Serializable]
+	public class NoAction : Action
 	{
-		public void DoAction()
+		public override void DoAction()
 		{
 			// Nothing
 		}
 
-		public void OnGUI()
+		public override void OnGUI()
 		{
 			EditorGUILayout.LabelField("No action");
 		}
