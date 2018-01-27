@@ -125,6 +125,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 95955414030037264}
+  playerSpriteTransform: {fileID: 4749775081789654}
   minSpeedForWalk: 0.05
 --- !u!195 &195547672121695748
 NavMeshAgent:
