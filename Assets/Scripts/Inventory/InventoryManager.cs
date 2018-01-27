@@ -5,20 +5,39 @@ namespace Inventory {
 	public class InventoryManager : MonoBehaviour
 	{
 
-		private List<Item> items = new List<Item>();
+		private List<Item> _items;
+
+		private static InventoryManager _instance; 
+
+
+		public static InventoryManager Instance
+		{
+			get
+			{
+				return _instance;
+			}
+		}
+
+		private void Awake() {
+			if (_instance == null) {
+				_instance = this;
+			} else {
+				Destroy(this);
+			}
+		}
 
 		public void AddItem(Item item) {
-			items.Add(item);
+			_items.Add(item);
 		}
 
 		public bool RemoveItem(Item item)
 		{
-			return items.Remove(item);
+			return _items.Remove(item);
 		}
 
-		public void HasItem(Item item)
+		public bool HasItem(Item item)
 		{
-			items.Contains(item);
+			return _items.Contains(item);
 		}
 
 		

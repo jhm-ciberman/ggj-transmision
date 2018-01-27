@@ -4,16 +4,10 @@ using UnityEngine;
 
 public class Interactable : MonoBehaviour {
 
-	[SerializeField]
-	private Interaction interaction; 
-
-	public void Interact() {
-		if (interaction) {
-			interaction.Interact();
-		} else {
-			Debug.LogError("No item defined for the interactable");
-		}
-		
+	public Transform interactionPoint; 
+	
+	public virtual void Interact() {
+		Debug.Log("No interaction");
 	}
 
 

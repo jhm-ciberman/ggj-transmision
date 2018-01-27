@@ -10,6 +10,10 @@ public class PlayerController : MonoBehaviour
 
 	private Interactable targetInteractable; 
 
+	private float walkingSpeed = 4f;
+
+	private bool _isWalking = false;
+
 	void Start()
 	{
 		agent = GetComponent<NavMeshAgent>();
@@ -17,8 +21,28 @@ public class PlayerController : MonoBehaviour
 		maskInteractable = LayerMask.GetMask("World");
 	}
 
+	public bool isWalking {
+		get {
+			return _isWalking;
+		}
+	}
 	void Update()
 	{
+
+		
+		if (agent.remainingDistance < 0.5f)
+		{
+			agent.speed = 0;
+			agent.isStopped = true;
+			_isWalking = false;
+			if (targetInteractable)
+			{
+				targetInteractable.Interact();
+				targetInteractable = null;
+			}
+			
+		}
+
 		if (Input.GetMouseButtonDown(0))
 		{
 			RaycastHit hit;
@@ -27,26 +51,25 @@ public class PlayerController : MonoBehaviour
 				Interactable interactable = hit.transform.GetComponent<Interactable>();
 				if (interactable)
 				{
-					targetInteractable = interactable;
-					agent.SetDestination(hit.point);
 					
+					targetInteractable = interactable;
+					agent.SetDestination(targetInteractable.interactionPoint.position);
+					agent.speed = walkingSpeed;
+					agent.isStopped = false;
+					_isWalking = true;
 				}
 			} 
 			else if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, 100, maskClickToWalk))
 			{
+				agent.speed = walkingSpeed;
+				agent.isStopped = false;
 				agent.SetDestination(hit.point);
+				_isWalking = true;
 			} 
 		}
 
 
-		if (targetInteractable) {
-			if (agent.pathStatus == NavMeshPathStatus.PathComplete || agent.remainingDistance < 0.2f)
-			{
-				agent.isStopped = true;
-				targetInteractable.Interact();
-				targetInteractable = null; 
-			}
-		}
+
 
 	}
 }
