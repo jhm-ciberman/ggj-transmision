@@ -11,7 +11,7 @@ class ChangeSpriteDirection: MonoBehaviour {
 	public float minSpeedForWalk = 0.05f;
 
 	void Update() {
-		Vector3 direction = transform.position - lastPosition;
+		// Vector3 direction = transform.position - lastPosition;
 		
 		//float angle = Vector3.Angle(Camera.main.transform.forward, direction);
 		speed = (transform.position - lastPosition).magnitude;

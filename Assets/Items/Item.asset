@@ -8,6 +8,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cf7e73609115adb438682130639a3899, type: 3}
-  m_Name: Interaction
+  m_Script: {fileID: 11500000, guid: 212afcaa1027f23499452c5514e38b77, type: 3}
+  m_Name: Item
   m_EditorClassIdentifier: 
+  itemName: Item Name
+  sprite: {fileID: 0}

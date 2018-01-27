@@ -20,9 +20,9 @@ GameObject:
   m_Component:
   - component: {fileID: 4266202224162206}
   - component: {fileID: 114265776716441112}
-  - component: {fileID: 114393805180862168}
+  - component: {fileID: 114387096984335940}
+  - component: {fileID: 114793450704887140}
   - component: {fileID: 195547672121695748}
-  - component: {fileID: 114010212800015644}
   m_Layer: 8
   m_Name: Player
   m_TagString: Untagged
@@ -91,19 +91,6 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
---- !u!114 &114010212800015644
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1392399706439570}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1fce957181087f5478b21943dae8f417, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  animator: {fileID: 95955414030037264}
-  minSpeedForWalk: 0
 --- !u!114 &114265776716441112
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -115,7 +102,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bfc6dadd863e5254ba98febb676a48e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &114393805180862168
+--- !u!114 &114387096984335940
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -123,9 +110,22 @@ MonoBehaviour:
   m_GameObject: {fileID: 1392399706439570}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cc60dba6f6faf5247bce777f51ba6ca7, type: 3}
+  m_Script: {fileID: 11500000, guid: 0ba1c2f92f617a848a8df52e06dec719, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &114793450704887140
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1392399706439570}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d771dc5b3d7983040bee93f4eca7e155, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 95955414030037264}
+  minSpeedForWalk: 0.05
 --- !u!195 &195547672121695748
 NavMeshAgent:
   m_ObjectHideFlags: 1
