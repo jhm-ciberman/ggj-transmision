@@ -2,6 +2,8 @@ using UnityEngine;
 using UnityEditor;
 using Actions;
 using Conditions;
+using System.Collections.Generic;
+using System; 
 
 [CustomEditor(typeof(Interaction))]
 public class InteractionEditor: Editor {
@@ -13,44 +15,75 @@ public class InteractionEditor: Editor {
 
 	public override void OnInspectorGUI()
 	{
-		Interaction t = (target as Interaction);
+		Interaction t = (Interaction) target;
+
+		// =======================================================
 
 		EditorGUILayout.LabelField("If");
-		foreach (var condition in t.conditions) {
+		foreach (var condition in t.conditions)
+		{
+			EditorGUILayout.BeginVertical();
 			condition.OnGUI();
+			EditorGUILayout.EndVertical();
 		}
-
-		this.conditionType = (ConditionType) EditorGUILayout.EnumPopup(this.conditionType);
+		
+		conditionType = (ConditionType) EditorGUILayout.EnumPopup(conditionType);
+		EditorGUILayout.BeginHorizontal();
 		if (GUILayout.Button("Add If Condition"))
 		{
-			t.conditions.Add(MakeCondition(this.conditionType));
+			t.conditions.Add(MakeCondition(conditionType));
 		}
-			
+		if (GUILayout.Button("Remove If Condition"))
+		{
+			t.conditions.RemoveAt(t.conditions.Count - 1);
+		}
+		EditorGUILayout.EndHorizontal();
+
+		// =======================================================
+
 		EditorGUILayout.LabelField("Then");
 		foreach (var action in t.actions)
 		{
+			EditorGUILayout.BeginVertical();
 			action.OnGUI();
+			EditorGUILayout.EndVertical();
 		}
-
-		this.actionType = (ActionType) EditorGUILayout.EnumPopup(this.actionType);
-		if (GUILayout.Button("Add Then Action"))
-		{
-			t.actions.Add(MakeAction(this.actionType));
-		}
-
 		
-		EditorGUILayout.LabelField("Else");
-		foreach (var elseAction in t.elseActions)
+		actionType = (ActionType)EditorGUILayout.EnumPopup(actionType);
+		EditorGUILayout.BeginHorizontal();
+		if (GUILayout.Button("Add Then Condition"))
 		{
-			elseAction.OnGUI();
+			t.actions.Add(MakeAction(actionType));
 		}
+		if (GUILayout.Button("Remove Then Condition"))
+		{
+			t.actions.RemoveAt(t.actions.Count - 1);
+		}
+		EditorGUILayout.EndHorizontal();
 
-		this.elseActionType = (ActionType) EditorGUILayout.EnumPopup(this.elseActionType);
-		if (GUILayout.Button("Add Else Action"))
+		// =======================================================
+
+		EditorGUILayout.LabelField("Else");
+		foreach (var action in t.elseActions)
 		{
-			t.elseActions.Add(MakeAction(this.elseActionType));
+			EditorGUILayout.BeginVertical();
+			action.OnGUI();
+			EditorGUILayout.EndVertical();
 		}
+		
+		elseActionType = (ActionType) EditorGUILayout.EnumPopup(elseActionType);
+		EditorGUILayout.BeginHorizontal();
+		if (GUILayout.Button("Add Else Condition"))
+		{
+			t.elseActions.Add(MakeAction(elseActionType));
+		}
+		if (GUILayout.Button("Remove Else Condition"))
+		{
+			t.elseActions.RemoveAt(t.elseActions.Count - 1);
+		}
+		EditorGUILayout.EndHorizontal();
 	}
+
 
 	public ICondition MakeCondition(ConditionType type)
 	{
