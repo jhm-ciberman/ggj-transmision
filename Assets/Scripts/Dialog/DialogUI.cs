@@ -38,4 +38,8 @@ public class DialogUI: MonoBehaviour {
 		dialogText.text = "";
 		_charsNumb = 0; 
 	}
+
+	public void SetPortraitSprite(Sprite sprite) {
+		portrait.GetComponent<SpriteRenderer>().sprite = sprite;
+	}
 }
