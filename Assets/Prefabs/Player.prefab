@@ -23,6 +23,7 @@ GameObject:
   - component: {fileID: 114387096984335940}
   - component: {fileID: 114793450704887140}
   - component: {fileID: 195547672121695748}
+  - component: {fileID: 136793159303974296}
   m_Layer: 8
   m_Name: Player
   m_TagString: Untagged
@@ -127,6 +128,19 @@ MonoBehaviour:
   animator: {fileID: 95955414030037264}
   playerSpriteTransform: {fileID: 4749775081789654}
   minSpeedForWalk: 0.05
+--- !u!136 &136793159303974296
+CapsuleCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1392399706439570}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.5
+  m_Height: 1
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!195 &195547672121695748
 NavMeshAgent:
   m_ObjectHideFlags: 1

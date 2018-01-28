@@ -2,9 +2,9 @@ using UnityEngine;
 
 class ChangeSpriteDirection: MonoBehaviour {
 
-	public Animator animator;
+	public Animator animator = null;
 
-	public Transform playerSpriteTransform;
+	public Transform playerSpriteTransform = null;
 
 	private Vector3 _lastPosition;
 

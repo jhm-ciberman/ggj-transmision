@@ -29,7 +29,6 @@ public class PlayerController : MonoBehaviour
 	void Update()
 	{
 
-		
 		if (agent.remainingDistance < 0.5f)
 		{
 			agent.speed = 0;
