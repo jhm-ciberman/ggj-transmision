@@ -72,7 +72,7 @@ public class DialogManager: MonoBehaviour {
 		_currentActor = actor;
 	}
 
-	public void ClearDialogs(string str)
+	public void ClearDialogs()
 	{
 		_dialogs.Clear();
 		_actors.Clear();

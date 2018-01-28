@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class DraggedItem : MonoBehaviour {
 	public Item item;
-
+	
+	public Camera inventoryCamera;
 	// Use this for initialization
 	void Start () {
 		
@@ -12,6 +13,6 @@ public class DraggedItem : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		transform.position = new Vector3 (Camera.main.ScreenToWorldPoint(Input.mousePosition).x,Camera.main.ScreenToWorldPoint(Input.mousePosition).y,0);
+		transform.position = new Vector3 (inventoryCamera.ScreenToWorldPoint(Input.mousePosition).x,inventoryCamera.ScreenToWorldPoint(Input.mousePosition).y,0);
 	}
 }

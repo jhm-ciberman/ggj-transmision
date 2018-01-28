@@ -7,17 +7,22 @@ public class InteractuableObject : MonoBehaviour {
 	public List<string> interaccionIncorrecta;
 
 	public List<string> agarrarFrases;
+
+	public List<string> observarFrases;
+
 	public bool InZone = false;
 
 	public bool dragAble = false;
 
 	public bool grabAble = false;
 
-	public Item item;
+	public List<Item> items;
+
+
 	public List<ItemNames> itemToUse;
 	// Use this for initialization
 	void Start () {
-		
+		GetComponent<Collider>().isTrigger = true;
 	}
 	
 	// Update is called once per frame
@@ -52,57 +57,72 @@ public class InteractuableObject : MonoBehaviour {
 /// </summary>
 	void OnMouseDown()
 	{
-		if (InZone){
-			
-			if (dragAble && InventoryManager.Instance.draggin){
-				Item aux = InventoryManager.Instance.itemDragged.GetComponent<DraggedItem>().item;
-				if (itemToUse.Contains(aux.itemName))
+		if (InZone)
+		{			
+			if (dragAble)
+			{
+				if (InventoryManager.Instance.draggin)
 				{
-					switch(aux.itemName){
-						case ItemNames.Bateria:
-						break;
-						case ItemNames.Cuchillo:
-						break;
-						case ItemNames.Balde:
-						break;
-						case ItemNames.BaldeAgua:
-						break;
-						case ItemNames.Pinza:
-						break;
-						case ItemNames.Tronco:
-						break;
-						case ItemNames.Alicate:
-						break;
-						case ItemNames.Cable:
-						break;
-						case ItemNames.Destornillador:
-						break;
-						case ItemNames.Manual:
-						break;
-						case ItemNames.Modulo:
-						break;
-						case ItemNames.Cuerda:
-						break;
-					} 
-				} else {
-					foreach(string a in interaccionIncorrecta) {
-						DialogManager.Instance.AddDialog(a);
+					Item aux = InventoryManager.Instance.itemDragged.GetComponent<DraggedItem>().item;
+					if (itemToUse.Contains(aux.itemName))
+					{
+						switch(aux.itemName) {
+							case ItemNames.Alicate:
+								InventoryManager.Instance.AddInventoryItem(items[0]);
+								DialogManager.Instance.ClearDialogs();
+								DialogManager.Instance.AddDialog("ALTO CABLE!!!");
+								gameObject.SetActive(false);
+								break;
+							case ItemNames.Balde:
+								InventoryManager.Instance.RemoveInventoryItem(aux.itemName);
+								InventoryManager.Instance.AddInventoryItem(items[0]);
+								DialogManager.Instance.ClearDialogs();
+								DialogManager.Instance.AddDialog("FRESHHH WATEEEEER");
+								gameObject.SetActive(false);
+								break;
+							case ItemNames.BaldeAgua:
+								GetComponent<EnableGameObject>().Enable();
+								gameObject.SetActive(false);
+								break;
+							case ItemNames.TroncoLianaCable:
+								DialogManager.Instance.ClearDialogs();
+								DialogManager.Instance.AddDialog("WACHO QUE LINDA LIANA CON TRONCO CON CABLE");
+								GetComponent<RopeFall>().Fall();
+								break;
+							default: 
+								Debug.Log("Unknown Item");
+								break;
+						} 
+						InventoryManager.Instance.StopDraggin();
+					} else 
+					{
+						DialogManager.Instance.ClearDialogs();
+						foreach(string a in interaccionIncorrecta) 
+						{
+							DialogManager.Instance.AddDialog(a);
+						}
 					}
 				}
-			
-		} else {
-			if (grabAble){
-					InventoryManager.Instance.AddInventoryItem(item);
-
-					foreach(string a in agarrarFrases){
+				else
+				{
+					DialogManager.Instance.ClearDialogs();
+					foreach (string a in observarFrases)
+					{
 						DialogManager.Instance.AddDialog(a);
-					}
+					}				}
+			} else { // Not draggable
+				if (grabAble){
+						foreach (Item item in items) {
+							InventoryManager.Instance.AddInventoryItem(item);
+						}
+						DialogManager.Instance.ClearDialogs();
+						foreach(string a in agarrarFrases){
+							DialogManager.Instance.AddDialog(a);
+						}
 
-					gameObject.SetActive (false);
-			}
-		}
-
-			
+						gameObject.SetActive (false);
+				}
+			}			
 		}
 	}
 }

@@ -8,8 +8,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 212afcaa1027f23499452c5514e38b77, type: 3}
-  m_Name: Item
+  m_Script: {fileID: 11500000, guid: 0cbb21ce57268454ebf9125b34d48c9e, type: 3}
+  m_Name: Liana
   m_EditorClassIdentifier: 
-  itemName: Item Name
-  sprite: {fileID: 0}
+  sprite: {fileID: 21300000, guid: 053cb6e4a2ba72e48ac66bddf976384a, type: 3}
+  itemName: 13

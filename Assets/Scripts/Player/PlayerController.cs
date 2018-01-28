@@ -8,7 +8,7 @@ public class PlayerController : MonoBehaviour
 	LayerMask maskClickToWalk;
 	LayerMask maskInteractable;
 
-	private Interactable targetInteractable; 
+	//private Interactable _targetInteractable; 
 
 	private float walkingSpeed = 4f;
 
@@ -34,20 +34,21 @@ public class PlayerController : MonoBehaviour
 			agent.speed = 0;
 			agent.isStopped = true;
 			_isWalking = false;
-			if (targetInteractable)
+			/*if (targetInteractable)
 			{
 				targetInteractable.Interact();
 				targetInteractable = null;
 			}
+			*/
 			
 		}
 
 		if (Input.GetMouseButtonDown(0))
 		{
 			RaycastHit hit;
-			if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, 100, maskInteractable))
+			/*if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, 100, maskInteractable))
 			{
-				Interactable interactable = hit.transform.GetComponent<Interactable>();
+				/*Interactable interactable = hit.transform.GetComponent<Interactable>();
 				if (interactable)
 				{
 					
@@ -57,8 +58,11 @@ public class PlayerController : MonoBehaviour
 					agent.isStopped = false;
 					_isWalking = true;
 				}
+				
 			} 
-			else if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, 100, maskClickToWalk))
+			else 
+			*/
+			if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, 100, maskClickToWalk))
 			{
 				agent.speed = walkingSpeed;
 				agent.isStopped = false;

@@ -1,6 +1,5 @@
 ﻿public enum ItemNames
 {
-	Cuerda,
 	Pinza,
 	Balde,
 	BaldeAgua,
@@ -8,9 +7,11 @@
 	Cuchillo,
 	Destornillador,
 	Modulo,
-Manual,
-Cable,
-Alicate,
-Tronco,
-Radio
+	Manual,
+	Cable,
+	Alicate,
+	Tronco,
+	Radio,
+	Liana,
+	TroncoLianaCable,
 }

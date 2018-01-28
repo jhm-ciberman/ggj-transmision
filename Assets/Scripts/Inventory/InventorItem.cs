@@ -7,12 +7,10 @@ public class InventorItem : MonoBehaviour {
 	public Item item;	// Use this for initialization
 	public Shadow shadow;
 	
-	InventoryManager inventory;
 	void Start()
 	{
 		GetComponent<Image>().sprite = item.sprite;
 		shadow.effectDistance = new Vector2(0,0);
-		inventory = GetComponentInParent<InventoryManager>();
 	}
 
 	void OnMouseEnter()

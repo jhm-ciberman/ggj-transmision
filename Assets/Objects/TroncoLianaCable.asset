@@ -9,7 +9,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0cbb21ce57268454ebf9125b34d48c9e, type: 3}
-  m_Name: Cuerda
+  m_Name: TroncoLianaCable
   m_EditorClassIdentifier: 
-  itemName: Cuerda
-  sprite: {fileID: 21300000, guid: 3a272fc4a2b0ce94089ccec864cfc465, type: 3}
+  sprite: {fileID: 21300000, guid: 84773b845a54dcc4e8d155bfa5884b70, type: 3}
+  itemName: 13

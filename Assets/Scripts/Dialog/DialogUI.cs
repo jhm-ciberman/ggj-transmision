@@ -40,6 +40,6 @@ public class DialogUI: MonoBehaviour {
 	}
 
 	public void SetPortraitSprite(Sprite sprite) {
-		portrait.GetComponent<SpriteRenderer>().sprite = sprite;
+		portrait.GetComponent<Image>().sprite = sprite;
 	}
 }
